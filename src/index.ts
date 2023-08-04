@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 //     return res.send('Hello World!');
 // });
 
-const url = 'mongodb://localhost:27017/clubcoord'; // DB URI
+const url = 'mongodb://127.0.0.1:27017/clubcoord'; // DB URI
 
 mongoose.Promise = Promise;
 const connectOptions: ConnectOptions = {
@@ -35,7 +35,7 @@ const connectOptions: ConnectOptions = {
 mongoose.connect(url, connectOptions).then(() => {
     console.log('MongoDB is connected');
 }).catch((err) => {
-    console.log('MongoDB connection unsuccessful');
+    console.log(err);
 });
 
 app.listen(8080);
