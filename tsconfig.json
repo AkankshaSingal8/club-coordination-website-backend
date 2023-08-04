@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+      "target": "ES6",                  /* Specify ECMAScript target version */
+      "module": "commonjs",             /* Specify module code generation */
+      "outDir": "./dist",               /* Specify output directory for transpiled files */
+      "rootDir": "src",               /* Specify input directory containing TypeScript files */
+      "strict": true,                   /* Enable strict type checking */
+      "esModuleInterop": true,          /* Allow importing CommonJS modules as ES6 modules */
+      "forceConsistentCasingInFileNames": true, /* Ensure consistent file names across platforms */
+      "moduleResolution": "node",      /* Use Node.js module resolution */
+      "resolveJsonModule": true,       /* Enable JSON module import */
+      "declaration": true,             /* Generate corresponding .d.ts files for TypeScript files */
+      "sourceMap": true                /* Generate source maps for easier debugging */
+    },
+    "include": ["src/**/*.ts"],         /* Specify files to be included in compilation */
+    "exclude": ["node_modules"]        /* Specify files to be excluded from compilation */
+}
+  
