@@ -9,6 +9,7 @@ import { Request, Response } from "express";
 //import router from './router';
 import mongoose from 'mongoose';
 import { ConnectOptions } from "mongoose";
+import clubRoutes from "./routes/clubs.routes";
 
 const app = express();
 app.use(cors({
@@ -36,4 +37,5 @@ mongoose.connect(url, connectOptions).then(() => {
 }).catch((err) => {
     console.log('MongoDB connection unsuccessful');
 });
+
 app.listen(8080);
