@@ -5,6 +5,8 @@ const router = Router();
 
 router.post("/", clubs.create);
 
+router.get("/", clubs.findAll);
+
 export default (app: Express) => {
-  app.use('/api/clubs', router);
+  app.use('/clubs', router);
 };
