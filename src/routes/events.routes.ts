@@ -1,12 +1,12 @@
-import express from 'express';
-import * as eventController from '../controllers/events.controller';
+import { Express, Router } from "express";
+import * as events from "../controllers/events.controller";
 
-const router = express.Router();
+const router = Router();
 
-router.post('/', eventController.createEvent);
-router.get('/', eventController.getAllEvents);
-router.get('/:id', eventController.getEventById);
-router.put('/:id', eventController.updateEventById);
-router.delete('/:id', eventController.deleteEventById);
+router.post("/", events.create);
 
-export default router;
+router.get("/", events.findAll);
+
+export default (app: Express) => {
+  app.use('/events', router);
+};
