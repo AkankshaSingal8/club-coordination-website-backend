@@ -8,5 +8,5 @@ router.post("/", events.create);
 router.get("/", events.findAll);
 
 export default (app: Express) => {
-  app.use('/events', router);
+  app.use('/studentcoordinator', router);
 };
