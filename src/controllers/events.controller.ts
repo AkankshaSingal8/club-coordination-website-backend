@@ -1,11 +1,31 @@
 import { Request, Response } from 'express';
-import Event, { IEvent } from '../models/events.model';
+import { Events } from '../models/events.model'; // Update the import statement
+import mongoose, { Document, Schema } from 'mongoose'; // Import mongoose with Document and Schema
+
+// Create a Mongoose schema based on the Events interface
+const eventSchema = new Schema<Events & Document>({
+  name: String,
+  description: String,
+  domain: String,
+  start: String,
+  end: String,
+  venue: String,
+  coordinator: String,
+  status: String,
+  registrationDeadline: String,
+  club: String,
+  participants: [String],
+  creationDate: String,
+});
+
+// Create a Mongoose model based on the schema
+const EventModel = mongoose.model<Events & Document>('Event', eventSchema);
 
 // Create a new event
 export const createEvent = async (req: Request, res: Response) => {
   try {
-    const eventData: IEvent = req.body;
-    const event = new Event(eventData);
+    const eventData: Events = req.body; // Use the Events interface
+    const event = new EventModel(eventData); // Use the EventModel to create a new event
     const savedEvent = await event.save();
     res.status(201).json(savedEvent);
   } catch (error) {
@@ -17,7 +37,7 @@ export const createEvent = async (req: Request, res: Response) => {
 // Get all events
 export const getAllEvents = async (req: Request, res: Response) => {
   try {
-    const events = await Event.find();
+    const events = await EventModel.find();
     res.status(200).json(events);
   } catch (error) {
     console.error('Error fetching events:', error);
@@ -29,7 +49,7 @@ export const getAllEvents = async (req: Request, res: Response) => {
 export const getEventById = async (req: Request, res: Response) => {
   const eventId = req.params.id;
   try {
-    const event = await Event.findById(eventId);
+    const event = await EventModel.findById(eventId);
     if (!event) {
       return res.status(404).json({ error: 'Event not found' });
     }
@@ -43,9 +63,9 @@ export const getEventById = async (req: Request, res: Response) => {
 // Update an event by ID
 export const updateEventById = async (req: Request, res: Response) => {
   const eventId = req.params.id;
-  const eventData: IEvent = req.body;
+  const eventData: Events = req.body; // Use the Events interface
   try {
-    const updatedEvent = await Event.findByIdAndUpdate(eventId, eventData, { new: true });
+    const updatedEvent = await EventModel.findByIdAndUpdate(eventId, eventData, { new: true });
     if (!updatedEvent) {
       return res.status(404).json({ error: 'Event not found' });
     }
@@ -60,7 +80,7 @@ export const updateEventById = async (req: Request, res: Response) => {
 export const deleteEventById = async (req: Request, res: Response) => {
   const eventId = req.params.id;
   try {
-    const deletedEvent = await Event.findByIdAndDelete(eventId);
+    const deletedEvent = await EventModel.findByIdAndDelete(eventId);
     if (!deletedEvent) {
       return res.status(404).json({ error: 'Event not found' });
     }
