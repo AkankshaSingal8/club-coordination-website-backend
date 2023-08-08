@@ -10,6 +10,7 @@ import { Request, Response } from "express";
 import mongoose from 'mongoose';
 import { ConnectOptions } from "mongoose";
 import clubRoutes from "./routes/clubs.routes";
+import eventRoutes from './routes/events.routes';
 
 const app = express();
 app.use(cors({
@@ -39,6 +40,7 @@ mongoose.connect(url, connectOptions).then(() => {
 });
 
 clubRoutes(app);
+app.use('/clubs/events', eventRoutes);
 
 const port = 8080;
 app.listen(port, () => {
