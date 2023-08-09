@@ -2,7 +2,7 @@ import mongoose, { Mongoose } from "mongoose";
 import { Clubs } from "./clubs.model";
 import { Users } from "./users.model"; 
 
-import { Events } from "./events.model"; // Change 'Events' to 'IEvent'
+import { Events } from "./events.model";
 
 
 mongoose.Promise = global.Promise;

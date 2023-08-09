@@ -40,7 +40,8 @@ mongoose.connect(url, connectOptions).then(() => {
 });
 
 clubRoutes(app);
-app.use('/clubs/events', eventRoutes);
+// app.use('/clubs/events', eventRoutes);
+eventRoutes(app);
 
 const port = 8080;
 app.listen(port, () => {
