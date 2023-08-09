@@ -3,6 +3,8 @@ import * as events from "../controllers/events.controller";
 
 const router = Router();
 
+router.put('/', events.updateStatus);
+
 router.post("/", events.create);
 
 router.get("/", events.findAll);
