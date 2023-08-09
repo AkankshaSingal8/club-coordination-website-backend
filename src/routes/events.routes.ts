@@ -5,7 +5,7 @@ const router = Router();
 
 router.put('/', events.updateStatus);
 
-router.post("/", events.create);
+router.post("/events/requests", events.create);
 
 router.get("/", events.findAll);
 
