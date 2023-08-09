@@ -1,32 +1,15 @@
-import { Request, Response } from 'express';
-import { Events } from '../models/events.model'; // Update the import statement
-import mongoose, { Document, Schema } from 'mongoose'; // Import mongoose with Document and Schema
+import db from "../models";
+import { Request, Response } from "express"; 
 
-// Create a Mongoose schema based on the Events interface
-const eventSchema = new Schema<Events & Document>({
-  name: String,
-  description: String,
-  domain: String,
-  start: String,
-  end: String,
-  venue: String,
-  coordinator: String,
-  status: String,
-  registrationDeadline: String,
-  club: String,
-  participants: [String],
-  creationDate: String,
-});
-
-// Create a Mongoose model based on the schema
-const EventModel = mongoose.model<Events & Document>('Event', eventSchema);
+const EventModel = db.events;
 
 // Create a new event
 export const createEvent = async (req: Request, res: Response) => {
   try {
-    const eventData: Events = req.body; // Use the Events interface
-    const event = new EventModel(eventData); // Use the EventModel to create a new event
+    const eventData = req.body; // Use the Events interface
+    const event = new EventModel(eventData);
     const savedEvent = await event.save();
+
     res.status(201).json(savedEvent);
   } catch (error) {
     console.error('Error creating event:', error);
@@ -63,7 +46,7 @@ export const getEventById = async (req: Request, res: Response) => {
 // Update an event by ID
 export const updateEventById = async (req: Request, res: Response) => {
   const eventId = req.params.id;
-  const eventData: Events = req.body; // Use the Events interface
+  const eventData = req.body; // Use the Events interface
   try {
     const updatedEvent = await EventModel.findByIdAndUpdate(eventId, eventData, { new: true });
     if (!updatedEvent) {
