@@ -65,7 +65,7 @@ export const updateStatus = async (req: Request, res: Response) => {
 
     const updatedEvent = await Events.findByIdAndUpdate(
       eventId,
-      { status: 'approved' },
+      { status: status },
       { new: true }
     );
 
